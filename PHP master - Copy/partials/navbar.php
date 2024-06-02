@@ -1,6 +1,7 @@
 <?php
     require("./_inc/config.php");
-    $logged_in = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
+    $logged_in = (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) === true;
+	$priv = (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] && $_SESSION['opravnenia'] > 1) === true;
 ?>
 
 <div class="container-fluid sticky-top">
@@ -26,9 +27,11 @@
                         <a href="praca.php" class="nav-item nav-link text-white">Pracovné Pozície</a>
                         <a href="kontakt.php" class="nav-item nav-link text-white">Kontakt</a>
 						
-						<?php if($logged_in == true): ?>
-							<a href="logout.php" class="nav-item nav-link text-white">Logout</a>
+						<?php if ($logged_in == true && $priv == true): ?>
 							<a href="admin.php" class="nav-item nav-link text-white">Administracia</a>
+							<a href="logout.php" class="nav-item nav-link text-white">Logout</a>
+						<?php elseif($logged_in == true): ?>
+							<a href="logout.php" class="nav-item nav-link text-white">Logout</a>
 						<?php else: ?>
 							<a href="login.php" class="nav-item nav-link text-white">Login</a>
 						<?php endif; ?>
