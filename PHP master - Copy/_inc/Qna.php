@@ -8,18 +8,18 @@
             $this->db = $this->connect();        
         }
 
-        public function select(){
-            try
-			{
-                $query =  $this->db->query("SELECT * FROM qna");
-                $ret = $query->fetchAll();
-                return $ret;
-              }
-			catch(PDOException $err)
-			{
-                echo($err->getMessage());
-            }   
-        }
+       public function select(){
+		try
+		{
+			$query = $this->db->query("SELECT * FROM qna");
+			$ret = $query->fetchAll(PDO::FETCH_ASSOC);
+			return $ret;
+		}
+		catch(PDOException $err)
+		{
+				echo($err->getMessage());
+		}   
+		}
 
 
         public function selectId($id)
